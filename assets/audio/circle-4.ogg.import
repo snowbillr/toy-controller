@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/circle-4.ogg-4d6f97043103555e9e1a2a6800a7a843.oggstr"
+
+[deps]
+
+source_file="res://assets/audio/circle-4.ogg"
+dest_files=[ "res://.import/circle-4.ogg-4d6f97043103555e9e1a2a6800a7a843.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

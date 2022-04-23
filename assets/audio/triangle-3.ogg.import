@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/triangle-3.ogg-d13485c9234f47dd953192d44655a741.oggstr"
+
+[deps]
+
+source_file="res://assets/audio/triangle-3.ogg"
+dest_files=[ "res://.import/triangle-3.ogg-d13485c9234f47dd953192d44655a741.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

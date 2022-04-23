@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/square-3.ogg-5670be58fe84a0b049501ea7169b3c67.oggstr"
+
+[deps]
+
+source_file="res://assets/audio/square-3.ogg"
+dest_files=[ "res://.import/square-3.ogg-5670be58fe84a0b049501ea7169b3c67.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0
