@@ -1,7 +1,7 @@
 extends Node2D
 
 onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
-onready var icons = $Icons
+onready var icon = $Icon
 
 var soundpacks = {
 	ButtonType.X: preload("res://assets/sound_packs/x.tres"),
@@ -22,13 +22,10 @@ func _process(delta):
 	if (Input.is_action_just_pressed("triangle")):
 		button_type = ButtonType.TRIANGLE
 		
-	if button_type != null:
+	if button_type != null and !audio_stream_player.playing:
 		_play_sound(button_type)
-		icons.show_icon(button_type)
+		icon.show_icon(button_type)
 
 func _play_sound(button):
-	if audio_stream_player.playing:
-		return
-	
 	audio_stream_player.stream = soundpacks[button].pick()
 	audio_stream_player.play()
