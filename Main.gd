@@ -11,18 +11,20 @@ var soundpacks = {
 }
 
 func _process(delta):
+	var button_type = null
+	
 	if (Input.is_action_just_pressed("circle")):
-		_play_sound(ButtonType.CIRCLE)
-		icons.show_icon(ButtonType.CIRCLE)
+		button_type = ButtonType.CIRCLE
 	if (Input.is_action_just_pressed("square")):
-		_play_sound(ButtonType.SQUARE)
-		icons.show_icon(ButtonType.SQUARE)
+		button_type = ButtonType.SQUARE
 	if (Input.is_action_just_pressed("x")):
-		_play_sound(ButtonType.X)
-		icons.show_icon(ButtonType.X)
+		button_type = ButtonType.X
 	if (Input.is_action_just_pressed("triangle")):
-		_play_sound(ButtonType.TRIANGLE)
-		icons.show_icon(ButtonType.TRIANGLE)
+		button_type = ButtonType.TRIANGLE
+		
+	if button_type != null:
+		_play_sound(button_type)
+		icons.show_icon(button_type)
 
 func _play_sound(button):
 	if audio_stream_player.playing:
