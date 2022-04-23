@@ -9,12 +9,18 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Reference",
+"class": "ButtonType",
+"language": "GDScript",
+"path": "res://src/button_type.gd"
+}, {
 "base": "Resource",
 "class": "SoundPack",
 "language": "GDScript",
 "path": "res://src/resources/sound_pack.gd"
 } ]
 _global_script_class_icons={
+"ButtonType": "",
 "SoundPack": ""
 }
 
