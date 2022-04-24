@@ -3,6 +3,7 @@ extends Node2D
 onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
 onready var icon: Sprite = $Icon
 onready var screen_flash: ColorRect = $ScreenFlash
+onready var cursor: Sprite = $Cursor
 
 var soundpacks = {
 	ButtonType.X: preload("res://assets/sound_packs/x.tres"),
@@ -17,6 +18,7 @@ func _input(event):
 
 func _process(delta):
 	var velocity = Input.get_vector("move_left", "move_right", "move_up", "move_down")
+	cursor.position += velocity * 15
 	
 	var button_type = null
 	
