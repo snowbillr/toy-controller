@@ -3,7 +3,9 @@ extends Node2D
 onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
 onready var icon: Sprite = $Icon
 onready var screen_flash: ColorRect = $ScreenFlash
-onready var cursor: Sprite = $Cursor
+onready var cursor: KinematicBody2D = $Cursor
+
+var cursor_velocity = Vector2.ZERO
 
 var soundpacks = {
 	ButtonType.X: preload("res://assets/sound_packs/x.tres"),
@@ -17,9 +19,6 @@ func _input(event):
 			OS.window_fullscreen = !OS.window_fullscreen
 
 func _process(delta):
-	var velocity = Input.get_vector("move_left", "move_right", "move_up", "move_down")
-	cursor.position += velocity * 15
-	
 	var button_type = null
 	
 	if (Input.is_action_just_pressed("circle")):
@@ -35,6 +34,11 @@ func _process(delta):
 		_play_sound(button_type)
 		icon.show_icon(button_type)
 		screen_flash.flash(button_type)
+
+func _physics_process(delta):
+	var input_velocity = Input.get_vector("move_left", "move_right", "move_up", "move_down")
+	cursor_velocity = cursor.move_and_slide(input_velocity * 625)
+
 
 func _play_sound(button):
 	audio_stream_player.stream = soundpacks[button].pick()

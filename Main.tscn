@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://Main.gd" type="Script" id=1]
 [ext_resource path="res://ScreenFlash.gd" type="Script" id=2]
@@ -231,6 +231,78 @@ tracks/2/keys = {
 "times": PoolRealArray( 0, 0.6, 1 )
 }
 
+[sub_resource type="Gradient" id=20]
+colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0 )
+
+[sub_resource type="GradientTexture" id=21]
+gradient = SubResource( 20 )
+
+[sub_resource type="ParticlesMaterial" id=19]
+flag_disable_z = true
+direction = Vector3( 1, 1, 0 )
+spread = 180.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 270.53
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+damping = 26.09
+scale = 0.1
+scale_random = 0.4
+color_ramp = SubResource( 21 )
+hue_variation = 0.03
+hue_variation_random = 1.0
+
+[sub_resource type="Animation" id=22]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/path = NodePath(".:scale:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath(".:scale:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+
+[sub_resource type="Animation" id=23]
+resource_name = "pulse"
+length = 2.0
+loop = true
+tracks/0/type = "bezier"
+tracks/0/path = NodePath(".:scale:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 0.9, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 1, 2 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath(".:scale:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 0.9, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 1, 2 )
+}
+
+[sub_resource type="CircleShape2D" id=24]
+radius = 60.0
+
 [node name="Main" type="Node2D"]
 script = ExtResource( 1 )
 
@@ -262,6 +334,22 @@ script = ExtResource( 7 )
 anims/RESET = SubResource( 13 )
 anims/show = SubResource( 14 )
 
-[node name="Cursor" type="Sprite" parent="."]
+[node name="Cursor" type="KinematicBody2D" parent="."]
 position = Vector2( 512, 300 )
+
+[node name="Sprite" type="Sprite" parent="Cursor"]
 texture = ExtResource( 3 )
+
+[node name="Particles2D" type="Particles2D" parent="Cursor/Sprite"]
+amount = 16
+local_coords = false
+process_material = SubResource( 19 )
+texture = ExtResource( 3 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Cursor/Sprite"]
+autoplay = "pulse"
+anims/RESET = SubResource( 22 )
+anims/pulse = SubResource( 23 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Cursor"]
+shape = SubResource( 24 )
