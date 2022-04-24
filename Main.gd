@@ -16,6 +16,8 @@ func _input(event):
 			OS.window_fullscreen = !OS.window_fullscreen
 
 func _process(delta):
+	var velocity = Input.get_vector("move_left", "move_right", "move_up", "move_down")
+	
 	var button_type = null
 	
 	if (Input.is_action_just_pressed("circle")):
