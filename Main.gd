@@ -5,7 +5,6 @@ onready var icon: Sprite = $Icon
 onready var screen_flash: ColorRect = $ScreenFlash
 onready var cursor: KinematicBody2D = $Cursor
 
-var cursor_velocity = Vector2.ZERO
 
 var soundpacks = {
 	ButtonType.X: preload("res://assets/sound_packs/x.tres"),
@@ -35,9 +34,6 @@ func _process(delta):
 		icon.show_icon(button_type)
 		screen_flash.flash(button_type)
 
-func _physics_process(delta):
-	var input_velocity = Input.get_vector("move_left", "move_right", "move_up", "move_down")
-	cursor_velocity = cursor.move_and_slide(input_velocity * 625)
 
 
 func _play_sound(button):

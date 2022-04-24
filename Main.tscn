@@ -1,8 +1,9 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://Main.gd" type="Script" id=1]
 [ext_resource path="res://ScreenFlash.gd" type="Script" id=2]
 [ext_resource path="res://assets/cursor.png" type="Texture" id=3]
+[ext_resource path="res://Cursor.gd" type="Script" id=4]
 [ext_resource path="res://Icon.gd" type="Script" id=7]
 
 [sub_resource type="Shader" id=1]
@@ -336,6 +337,7 @@ anims/show = SubResource( 14 )
 
 [node name="Cursor" type="KinematicBody2D" parent="."]
 position = Vector2( 512, 300 )
+script = ExtResource( 4 )
 
 [node name="Sprite" type="Sprite" parent="Cursor"]
 texture = ExtResource( 3 )
