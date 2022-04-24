@@ -2,7 +2,7 @@ extends Node2D
 
 onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
 onready var icon: Sprite = $Icon
-onready var screen_flash: ColorRect = get_node("MarginContainer/ScreenFlash")
+onready var screen_flash: ColorRect = $ScreenFlash
 
 var soundpacks = {
 	ButtonType.X: preload("res://assets/sound_packs/x.tres"),
