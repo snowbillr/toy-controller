@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Main.gd" type="Script" id=1]
 [ext_resource path="res://ScreenFlash.gd" type="Script" id=2]
@@ -102,6 +102,39 @@ tracks/0/keys = {
 "points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
 "times": PoolRealArray( 0, 0.6 )
 }
+
+[sub_resource type="Shader" id=17]
+code = "shader_type canvas_item;
+
+const vec4 outline_color = vec4(1, 1, 1, 1);
+
+void fragment() {
+  	//get regular color
+	vec4 col = texture(TEXTURE,UV);
+
+    //sample directions
+	vec2 sample_directions[4];
+	sample_directions[0] = vec2(1, 0) * 0.01;
+	sample_directions[1] = vec2(0, 1) * 0.01;
+	sample_directions[2] = vec2(-1, 0) * 0.01;
+	sample_directions[3] = vec2(0, -1) * 0.01;
+
+    //generate border
+    float maxAlpha = 0.0;
+    for(int index = 0; index < 4; index++){
+    		vec2 sampleUV = UV + sample_directions[index];
+    		maxAlpha = max(maxAlpha, texture(TEXTURE, sampleUV).a);
+  	}
+
+	//apply border
+	col.rgb = mix(vec3(1, 1, 1), col.rgb, col.a);
+	col.a = max(col.a, maxAlpha);
+
+	COLOR = col;
+}"
+
+[sub_resource type="ShaderMaterial" id=18]
+shader = SubResource( 17 )
 
 [sub_resource type="Animation" id=13]
 length = 0.001
@@ -220,6 +253,7 @@ anims/RESET = SubResource( 15 )
 anims/flash = SubResource( 16 )
 
 [node name="Icon" type="Sprite" parent="."]
+material = SubResource( 18 )
 position = Vector2( 512, 300 )
 scale = Vector2( 0.1, 0.1 )
 script = ExtResource( 7 )
