@@ -2,7 +2,7 @@ extends Node2D
 
 onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
 onready var icon: Sprite = $Icon
-onready var screen_flash: ColorRect = $ScreenFlash
+onready var screen_flash: ColorRect = get_node("MarginContainer/ScreenFlash")
 
 var soundpacks = {
 	ButtonType.X: preload("res://assets/sound_packs/x.tres"),
@@ -10,6 +10,10 @@ var soundpacks = {
 	ButtonType.TRIANGLE: preload("res://assets/sound_packs/triangle.tres"),
 	ButtonType.CIRCLE: preload("res://assets/sound_packs/circle.tres"),
 }
+
+func _input(event):
+	if event.is_action_pressed("toggle_fullscreen"):
+			OS.window_fullscreen = !OS.window_fullscreen
 
 func _process(delta):
 	var button_type = null

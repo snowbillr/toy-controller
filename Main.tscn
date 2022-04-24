@@ -11,14 +11,12 @@ void fragment()
 {
 	float aspect = (1.0 / TEXTURE_PIXEL_SIZE).y/(1.0 / TEXTURE_PIXEL_SIZE).x;
 	float value;
-	vec2 uv = UV.xy / (1.0 / TEXTURE_PIXEL_SIZE).x;
-	uv -= vec2(0.5, 0.5*aspect);
 	
-	float rot = radians(45.0); // radians(45.0*sin(iTime));
+	float rot = radians(45.0);
 	vec2 part1 = vec2(cos(rot), -sin(rot));
 	vec2 part2 = vec2(sin(rot), cos(rot));
 	mat2 m = mat2(part1, part2);
-	uv = m * uv;
+	vec2 uv = m * UV;
 	uv += vec2(0.5, 0.5*aspect);
 	uv.y+=0.5*(1.0-aspect);
 	vec2 pos = 10.0*uv;
@@ -235,22 +233,28 @@ tracks/2/keys = {
 [node name="Main" type="Node2D"]
 script = ExtResource( 1 )
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 1024.0
+margin_bottom = 600.0
 
-[node name="Background" type="ColorRect" parent="."]
+[node name="Background" type="ColorRect" parent="MarginContainer"]
 material = SubResource( 2 )
 margin_right = 1024.0
 margin_bottom = 600.0
 
-[node name="ScreenFlash" type="ColorRect" parent="."]
+[node name="ScreenFlash" type="ColorRect" parent="MarginContainer"]
 modulate = Color( 1, 1, 1, 0 )
 margin_right = 1024.0
 margin_bottom = 600.0
 script = ExtResource( 2 )
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="ScreenFlash"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="MarginContainer/ScreenFlash"]
 anims/RESET = SubResource( 15 )
 anims/flash = SubResource( 16 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 
 [node name="Icon" type="Sprite" parent="."]
 material = SubResource( 18 )
