@@ -19,7 +19,7 @@ var soundpacks = {
 
 func _input(event):
 	if event.is_action_pressed("toggle_fullscreen"):
-			OS.window_fullscreen = !OS.window_fullscreen
+		OS.window_fullscreen = !OS.window_fullscreen
 
 func _process(delta):
 	var button_type = null
