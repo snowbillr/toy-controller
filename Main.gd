@@ -26,7 +26,7 @@ func _process(delta):
 	if button_type != null and !audio_stream_player.playing:
 		_play_sound(button_type)
 		icon.show_icon(button_type)
-		screen_flash.flash()
+		screen_flash.flash(button_type)
 
 func _play_sound(button):
 	audio_stream_player.stream = soundpacks[button].pick()
